@@ -37,7 +37,7 @@ public class TennisGame1 implements TennisGame {
                 
             }
         }
-        else if (isScoreSupFourty())
+        else if (isScoreMoreThanForty())
         {
             int minusResult = player.m_score1 - player.m_score2;
             if (minusResult==1) score ="Advantage player1";
@@ -71,7 +71,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private boolean isScoreSupFourty() {
+    private boolean isScoreMoreThanForty() {
         return player.m_score1 >= 4 || player.m_score2 >= 4;
     }
 }
