@@ -9,7 +9,11 @@ public enum GamePointLitteral {
         this.value = value;
     }
 
-    public String getValue() {
+    public String getLitteral() {
         return value;
+    }
+
+    public String getLitteralEquality() {
+        return value + "-All";
     }
 }

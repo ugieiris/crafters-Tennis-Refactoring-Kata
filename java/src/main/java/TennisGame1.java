@@ -20,6 +20,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
+        // displayEquality
+        // displayAdvantage
+        // displayWinnerOfGame
+        // displayStandardGamePoints
+
         String score = "";
         int tempScore=0;
         if (m_score1==m_score2)
@@ -27,13 +32,13 @@ public class TennisGame1 implements TennisGame {
             switch (m_score1)
             {
                 case 0:
-                        score = GamePointLitteral.LOVE.getValue() + "-All";
+                        score = GamePointLitteral.LOVE.getLitteralEquality();
                     break;
                 case 1:
-                        score = GamePointLitteral.FIFTEEN.getValue() + "-All";
+                        score = GamePointLitteral.FIFTEEN.getLitteralEquality();
                     break;
                 case 2:
-                        score = GamePointLitteral.THIRTY.getValue() + "-All";
+                        score = GamePointLitteral.THIRTY.getLitteralEquality();
                     break;
                 default:
                         score = "Deuce";
@@ -60,16 +65,16 @@ public class TennisGame1 implements TennisGame {
                 switch(tempScore)
                 {
                     case 0:
-                        score+= GamePointLitteral.LOVE.getValue();
+                        score+= GamePointLitteral.LOVE.getLitteral();
                         break;
                     case 1:
-                        score+= GamePointLitteral.FIFTEEN.getValue();
+                        score+= GamePointLitteral.FIFTEEN.getLitteral();
                         break;
                     case 2:
-                        score+= GamePointLitteral.THIRTY.getValue();
+                        score+= GamePointLitteral.THIRTY.getLitteral();
                         break;
                     case 3:
-                        score+= GamePointLitteral.FORTY.getValue();
+                        score+= GamePointLitteral.FORTY.getLitteral();
                         break;
                 }
             }
