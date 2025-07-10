@@ -4,6 +4,8 @@ public class TennisGame1 implements TennisGame {
     public static final String PLAYER_1 = "player1";
     public static final String PLAYER_2 = "player2";
     public static final String ALL = "All";
+    public static final String ADVANTAGE = "Advantage";
+    public static final String WIN_FOR = "Win for";
     private int m_score1 = 0;
     private int m_score2 = 0;
     private String player1Name;
@@ -46,11 +48,11 @@ public class TennisGame1 implements TennisGame {
         else if (m_score1>=4 || m_score2>=4)
         {
             int minusResult = m_score1-m_score2;
-            if (minusResult==1) score = "Advantage " + PLAYER_1;
+            if (minusResult==1) score = ADVANTAGE + " " + PLAYER_1;
             else {
-                if (minusResult ==-1) score = "Advantage " + PLAYER_2;
-                else if (minusResult>=2) score = "Win for " + PLAYER_1;
-                else score = "Win for " + PLAYER_2;
+                if (minusResult ==-1) score = ADVANTAGE + " " + PLAYER_2;
+                else if (minusResult>=2) score = WIN_FOR + " " + PLAYER_1;
+                else score = WIN_FOR + " " + PLAYER_2;
             }
         }
         else
