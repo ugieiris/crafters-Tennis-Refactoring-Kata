@@ -34,18 +34,13 @@ public class TennisGame1 implements TennisGame {
         } else if (isPlayerScoreOverForty() && Math.abs(getPlayersScoreDifference()) >= 2) {
             score = displayWinnerOfGame();
         } else {
-            int tempScore = 0;
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) {
-                    tempScore = m_score1;
-                } else {
-                    score += "-";
-                    tempScore = m_score2;
-                }
-                score += getLitteralScore(tempScore);
-            }
+            score = displayStandardGamePoints();
         }
         return score;
+    }
+
+    private String displayStandardGamePoints() {
+        return getLitteralScore(m_score1) + "-" + getLitteralScore(m_score2);
     }
 
     private static String getLitteralScore(int tempScore) {
