@@ -32,13 +32,13 @@ public class TennisGame1 implements TennisGame {
                     score = GamePointLitteral.LOVE.getValue() + "-" + ALL;
                     break;
                 case 1:
-                        score = "Fifteen-" + ALL;
+                        score = GamePointLitteral.FIFTEEN.getValue() + "-" + ALL;
                     break;
                 case 2:
-                        score = "Thirty-" + ALL;
+                        score = GamePointLitteral.THIRTY.getValue() + "-" + ALL;
                     break;
                 default:
-                        score = "Deuce";
+                        score = GamePointLitteral.DEUCE.getValue();
                     break;
                 
             }
