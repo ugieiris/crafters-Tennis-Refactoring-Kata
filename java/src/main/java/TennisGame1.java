@@ -29,20 +29,10 @@ public class TennisGame1 implements TennisGame {
         String score = "";
         if (m_score1 == m_score2) {
             score = displayEquality();
-        } else if (isPlayerScoreOverForty()) {
-            int minusResult = getPlayersScoreDifference();
-
-            String playerGameLeader = getPlayerGameLeader(minusResult);
-
-            if (Math.abs(minusResult) == 1) {
-                score = "Advantage " + playerGameLeader;
-            } else if (minusResult == -1) {
-                score = "Advantage " + playerGameLeader;
-            } else if (minusResult >= 2) {
-                score = "Win for " + playerGameLeader;
-            } else {
-                score = "Win for " + playerGameLeader;
-            }
+        } else if (isPlayerScoreOverForty() && Math.abs(getPlayersScoreDifference()) == 1) {
+            score = displayAdvantage();
+        } else if (isPlayerScoreOverForty() && Math.abs(getPlayersScoreDifference()) >= 2) {
+            score = displayWinnerOfGame();
         } else {
             int tempScore = 0;
             for (int i = 1; i < 3; i++) {
@@ -52,22 +42,31 @@ public class TennisGame1 implements TennisGame {
                     score += "-";
                     tempScore = m_score2;
                 }
-                switch (tempScore) {
-                case 0:
-                    score += GamePointLitteral.LOVE.getLitteral();
-                    break;
-                case 1:
-                    score += GamePointLitteral.FIFTEEN.getLitteral();
-                    break;
-                case 2:
-                    score += GamePointLitteral.THIRTY.getLitteral();
-                    break;
-                case 3:
-                    score += GamePointLitteral.FORTY.getLitteral();
-                    break;
-                }
+                score += getLitteralScore(tempScore);
             }
         }
+        return score;
+    }
+
+    private static String getLitteralScore(int tempScore) {
+        return switch (tempScore) {
+            case 0 -> GamePointLitteral.LOVE.getLitteral();
+            case 1 -> GamePointLitteral.FIFTEEN.getLitteral();
+            case 2 -> GamePointLitteral.THIRTY.getLitteral();
+            case 3 -> GamePointLitteral.FORTY.getLitteral();
+            default -> "";
+        };
+    }
+
+    private String displayWinnerOfGame() {
+        String score;
+        score = "Win for " + getPlayerGameLeader(getPlayersScoreDifference());
+        return score;
+    }
+
+    private String displayAdvantage() {
+        String score;
+        score = "Advantage " + getPlayerGameLeader(getPlayersScoreDifference());
         return score;
     }
 
