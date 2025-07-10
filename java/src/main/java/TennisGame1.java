@@ -37,26 +37,18 @@ public class TennisGame1 implements TennisGame {
             else if (minusResult >= 2) score = WIN_FOR + " " + PLAYER_1;
             else score = WIN_FOR + " " + PLAYER_2;
         } else {
-            score = displayScore(player1GamePoints, score) + "-" + displayScore(player2GamePoints, score);
+            score = displayScore(player1GamePoints) + "-" + displayScore(player2GamePoints);
         }
         return score;
     }
 
-    private static String displayScore(int tempScore, String score) {
-        switch (tempScore) {
-            case 0:
-                score += GamePointLitteral.LOVE;
-                break;
-            case 1:
-                score += GamePointLitteral.FIFTEEN;
-                break;
-            case 2:
-                score += GamePointLitteral.THIRTY;
-                break;
-            case 3:
-                score += GamePointLitteral.FORTY;
-                break;
-        }
-        return score;
+    private static String displayScore(int score) {
+        return switch (score) {
+            case 0 -> GamePointLitteral.LOVE;
+            case 1 -> GamePointLitteral.FIFTEEN;
+            case 2 -> GamePointLitteral.THIRTY;
+            case 3 -> GamePointLitteral.FORTY;
+            default -> throw new IllegalStateException("Unexpected value: " + score);
+        };
     }
 }
