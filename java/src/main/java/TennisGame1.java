@@ -61,16 +61,16 @@ public class TennisGame1 implements TennisGame {
                 switch(tempScore)
                 {
                     case 0:
-                        score+="Love";
+                        score+= GamePointLitteral.LOVE.getValue();
                         break;
                     case 1:
-                        score+="Fifteen";
+                        score+= GamePointLitteral.FIFTEEN.getValue();
                         break;
                     case 2:
-                        score+="Thirty";
+                        score+= GamePointLitteral.THIRTY.getValue();
                         break;
                     case 3:
-                        score+="Forty";
+                        score+= GamePointLitteral.FORTY.getValue();
                         break;
                 }
             }
