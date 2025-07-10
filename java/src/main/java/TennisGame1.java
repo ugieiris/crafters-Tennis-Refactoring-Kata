@@ -8,12 +8,8 @@ public class TennisGame1 implements TennisGame {
     public static final String WIN_FOR = "Win for";
     private int player1GamePoints = 0;
     private int player2GamePoints = 0;
-    private final String player1Name;
-    private final String player2Name;
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
     }
 
     public void wonPoint(String playerName) {
@@ -24,22 +20,30 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         if (player1GamePoints == player2GamePoints) {
-            score = switch (player1GamePoints) {
-                case 0 -> GamePointLitteral.LOVE + "-All";
-                case 1 -> GamePointLitteral.FIFTEEN + "-All";
-                case 2 -> GamePointLitteral.THIRTY + "-All";
-                default -> "Deuce";
-            };
+            score = getScoreEqual();
         } else if (player1GamePoints >= 4 || player2GamePoints >= 4) {
             int minusResult = player1GamePoints - player2GamePoints;
-            if (minusResult == 1) score = ADVANTAGE + " " + PLAYER_1;
-            else if (minusResult == -1) score = ADVANTAGE + " " + PLAYER_2;
-            else if (minusResult >= 2) score = WIN_FOR + " " + PLAYER_1;
-            else score = WIN_FOR + " " + PLAYER_2;
+
+            if (Math.abs(minusResult) == 1) {
+                score = ADVANTAGE + " " + displayWinner(minusResult);
+            } else {
+                score = WIN_FOR + " " + displayWinner(minusResult);
+            }
         } else {
             score = displayScore(player1GamePoints) + "-" + displayScore(player2GamePoints);
         }
         return score;
+    }
+
+    private static String displayWinner(int minusResult) {
+        return minusResult > 0 ? PLAYER_1 : PLAYER_2;
+    }
+
+    private String getScoreEqual() {
+        return switch (player1GamePoints) {
+            case 0, 1, 2 -> displayScore(player1GamePoints) + "-All";
+            default -> "Deuce";
+        };
     }
 
     private static String displayScore(int score) {
