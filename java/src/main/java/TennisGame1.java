@@ -23,60 +23,52 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
+        StringBuilder score = new StringBuilder();
         if (m_score1==m_score2)
         {
-            switch (m_score1)
-            {
-                case 0:
-                    score = GamePointLitteral.LOVE.getValue() + "-" + ALL;
-                    break;
-                case 1:
-                        score = GamePointLitteral.FIFTEEN.getValue() + "-" + ALL;
-                    break;
-                case 2:
-                        score = GamePointLitteral.THIRTY.getValue() + "-" + ALL;
-                    break;
-                default:
-                        score = GamePointLitteral.DEUCE.getValue();
-                    break;
-                
-            }
+            score = new StringBuilder(switch (m_score1) {
+                case 0 -> GamePointLitteral.LOVE.getValue() + "-" + ALL;
+                case 1 -> GamePointLitteral.FIFTEEN.getValue() + "-" + ALL;
+                case 2 -> GamePointLitteral.THIRTY.getValue() + "-" + ALL;
+                default -> GamePointLitteral.DEUCE.getValue();
+            });
         }
         else if (m_score1>=4 || m_score2>=4)
         {
             int minusResult = m_score1-m_score2;
-            if (minusResult==1) score = ADVANTAGE + " " + player1Name;
+            if (minusResult==1) score = new StringBuilder(ADVANTAGE + " " + player1Name);
             else {
-                if (minusResult ==-1) score = ADVANTAGE + " " + player2Name;
-                else if (minusResult>=2) score = WIN_FOR + " " + player1Name;
-                else score = WIN_FOR + " " + player2Name;
+                if (minusResult ==-1) score = new StringBuilder(ADVANTAGE + " " + player2Name);
+                else if (minusResult>=2) score = new StringBuilder(WIN_FOR + " " + player1Name);
+                else score = new StringBuilder(WIN_FOR + " " + player2Name);
             }
         }
         else
         {
+
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
+                int tempScore=0;
+                if (i==1)
+                    tempScore = m_score1;
+                else { score.append("-"); tempScore = m_score2;}
                 switch(tempScore)
                 {
                     case 0:
-                        score+= GamePointLitteral.LOVE.getValue();
+                        score.append(GamePointLitteral.LOVE.getValue());
                         break;
                     case 1:
-                        score+= GamePointLitteral.FIFTEEN.getValue();
+                        score.append(GamePointLitteral.FIFTEEN.getValue());
                         break;
                     case 2:
-                        score+= GamePointLitteral.THIRTY.getValue();
+                        score.append(GamePointLitteral.THIRTY.getValue());
                         break;
                     case 3:
-                        score+= GamePointLitteral.FORTY.getValue();
+                        score.append(GamePointLitteral.FORTY.getValue());
                         break;
                 }
             }
         }
-        return score;
+        return score.toString();
     }
 }
