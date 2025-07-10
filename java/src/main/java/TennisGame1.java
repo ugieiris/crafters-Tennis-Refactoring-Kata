@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class TennisGame1 implements TennisGame {
-    
+
     private int m_score1 = 0;
     private int m_score2 = 0;
     private final String player1Name;
@@ -27,13 +27,13 @@ public class TennisGame1 implements TennisGame {
             switch (m_score1)
             {
                 case 0:
-                        score = "Love-All";
+                        score = GamePointLitteral.LOVE.getValue() + "-All";
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                        score = GamePointLitteral.FIFTEEN.getValue() + "-All";
                     break;
                 case 2:
-                        score = "Thirty-All";
+                        score = GamePointLitteral.THIRTY.getValue() + "-All";
                     break;
                 default:
                         score = "Deuce";
@@ -60,16 +60,16 @@ public class TennisGame1 implements TennisGame {
                 switch(tempScore)
                 {
                     case 0:
-                        score+="Love";
+                        score+= GamePointLitteral.LOVE.getValue();
                         break;
                     case 1:
-                        score+="Fifteen";
+                        score+= GamePointLitteral.FIFTEEN.getValue();
                         break;
                     case 2:
-                        score+="Thirty";
+                        score+= GamePointLitteral.THIRTY.getValue();
                         break;
                     case 3:
-                        score+="Forty";
+                        score+= GamePointLitteral.FORTY.getValue();
                         break;
                 }
             }
