@@ -27,13 +27,13 @@ public class TennisGame1 implements TennisGame {
         if (player1GamePoints == player2GamePoints) {
             switch (player1GamePoints) {
                 case 0:
-                    score = "Love-All";
+                    score = GamePointLitteral.LOVE + "-All";
                     break;
                 case 1:
-                    score = "Fifteen-All";
+                    score = GamePointLitteral.FIFTEEN + "-All";
                     break;
                 case 2:
-                    score = "Thirty-All";
+                    score = GamePointLitteral.THIRTY + "-All";
                     break;
                 default:
                     score = "Deuce";
@@ -55,16 +55,16 @@ public class TennisGame1 implements TennisGame {
                 }
                 switch (tempScore) {
                     case 0:
-                        score += "Love";
+                        score += GamePointLitteral.LOVE;
                         break;
                     case 1:
-                        score += "Fifteen";
+                        score += GamePointLitteral.FIFTEEN;
                         break;
                     case 2:
-                        score += "Thirty";
+                        score += GamePointLitteral.THIRTY;
                         break;
                     case 3:
-                        score += "Forty";
+                        score += GamePointLitteral.FORTY;
                         break;
                 }
             }
