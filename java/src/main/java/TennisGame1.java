@@ -23,13 +23,13 @@ public class TennisGame1 implements TennisGame {
             switch (player.m_score1)
             {
                 case 0:
-                        score = "Love-All";
+                        score = SCORE.LOVE.getValue() + "-All";
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                        score = SCORE.FIFTEEN.getValue() + "-All";
                     break;
                 case 2:
-                        score = "Thirty-All";
+                        score = SCORE.THIRTY.getValue() + "-All";
                     break;
                 default:
                         score = "Deuce";
@@ -37,7 +37,7 @@ public class TennisGame1 implements TennisGame {
                 
             }
         }
-        else if (player.m_score1 >=4 || player.m_score2 >=4)
+        else if (isScoreSupFourty())
         {
             int minusResult = player.m_score1 - player.m_score2;
             if (minusResult==1) score ="Advantage player1";
@@ -54,20 +54,24 @@ public class TennisGame1 implements TennisGame {
                 switch(tempScore)
                 {
                     case 0:
-                        score+="Love";
+                        score+= SCORE.LOVE.getValue();
                         break;
                     case 1:
-                        score+="Fifteen";
+                        score+= SCORE.FIFTEEN.getValue();
                         break;
                     case 2:
-                        score+="Thirty";
+                        score+= SCORE.THIRTY.getValue();
                         break;
                     case 3:
-                        score+="Forty";
+                        score+= SCORE.FORTY.getValue();
                         break;
                 }
             }
         }
         return score;
+    }
+
+    private boolean isScoreSupFourty() {
+        return player.m_score1 >= 4 || player.m_score2 >= 4;
     }
 }
