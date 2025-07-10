@@ -12,34 +12,40 @@ public class TennisGame1 implements TennisGame {
     public TennisGame1(String player1Name, String player2Name) {
     }
 
+    @Override
     public void wonPoint(String playerName) {
         if (Objects.equals(playerName, PLAYER_1)) player1GamePoints += 1;
         else player2GamePoints += 1;
     }
 
+    @Override
     public String getScore() {
-        String score = "";
         if (player1GamePoints == player2GamePoints) {
-            score = getScoreEqual();
+            return displayEquality();
         } else if (player1GamePoints >= 4 || player2GamePoints >= 4) {
-            int minusResult = player1GamePoints - player2GamePoints;
-
-            if (Math.abs(minusResult) == 1) {
-                score = ADVANTAGE + " " + displayWinner(minusResult);
-            } else {
-                score = WIN_FOR + " " + displayWinner(minusResult);
-            }
-        } else {
-            score = displayScore(player1GamePoints) + "-" + displayScore(player2GamePoints);
+            int scoreDifference = player1GamePoints - player2GamePoints;
+            return Math.abs(scoreDifference) == 1 ? displayAdvantage(scoreDifference) : displayWinnerOfGame(scoreDifference);
         }
-        return score;
+        return displayScore(player1GamePoints) + "-" + displayScore(player2GamePoints);
     }
 
-    private static String displayWinner(int minusResult) {
-        return minusResult > 0 ? PLAYER_1 : PLAYER_2;
+    private static String displayWinnerOfGame(int minusResult) {
+        return WIN_FOR + " " + displayWinner(minusResult);
     }
 
-    private String getScoreEqual() {
+    private static String displayAdvantage(int minusResult) {
+        return ADVANTAGE + " " + displayWinner(minusResult);
+    }
+
+    /**
+     * Affiche le nom du gagnant en fonction du résultat de la soustraction.
+     * Positif pour le joueur 1, négatif pour le joueur 2.
+     */
+    private static String displayWinner(int scoreDifference) {
+        return scoreDifference > 0 ? PLAYER_1 : PLAYER_2;
+    }
+
+    private String displayEquality() {
         return switch (player1GamePoints) {
             case 0, 1, 2 -> displayScore(player1GamePoints) + "-All";
             default -> "Deuce";
