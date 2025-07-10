@@ -13,73 +13,83 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (Objects.equals(playerName, player1Name))
+        if (Objects.equals(playerName, player1Name)) {
             m_score1 += 1;
-        else
+        } else {
             m_score2 += 1;
+        }
     }
 
     public String getScore() {
-        // displayEquality
-        // displayAdvantage
-        // displayWinnerOfGame
-        // displayStandardGamePoints
+        //displayEquality
+        //displayAdvantage
+        //displayWinnerOfGame
+        //displayStandardGamePoints
 
         String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
+        if (m_score1 == m_score2) {
+            score = displayEquality();
+        } else if (isPlayerScoreOverForty()) {
+            int minusResult = getPlayersScoreDifference();
+
+            String playerGameLeader = getPlayerGameLeader(minusResult);
+
+            if (Math.abs(minusResult) == 1) {
+                score = "Advantage " + playerGameLeader;
+            } else if (minusResult == -1) {
+                score = "Advantage " + playerGameLeader;
+            } else if (minusResult >= 2) {
+                score = "Win for " + playerGameLeader;
+            } else {
+                score = "Win for " + playerGameLeader;
+            }
+        } else {
+            int tempScore = 0;
+            for (int i = 1; i < 3; i++) {
+                if (i == 1) {
+                    tempScore = m_score1;
+                } else {
+                    score += "-";
+                    tempScore = m_score2;
+                }
+                switch (tempScore) {
                 case 0:
-                        score = GamePointLitteral.LOVE.getLitteralEquality();
+                    score += GamePointLitteral.LOVE.getLitteral();
                     break;
                 case 1:
-                        score = GamePointLitteral.FIFTEEN.getLitteralEquality();
+                    score += GamePointLitteral.FIFTEEN.getLitteral();
                     break;
                 case 2:
-                        score = GamePointLitteral.THIRTY.getLitteralEquality();
+                    score += GamePointLitteral.THIRTY.getLitteral();
                     break;
-                default:
-                        score = "Deuce";
+                case 3:
+                    score += GamePointLitteral.FORTY.getLitteral();
                     break;
-                
-            }
-        }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1 - m_score2;
-            if (minusResult==1) score = "Advantage " + player1Name;
-            else {
-                if (minusResult ==-1) score = "Advantage " + player2Name;
-                else if (minusResult>=2) score = "Win for " + player1Name;
-                else score = "Win for " + player2Name;
-            }
-        }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+= GamePointLitteral.LOVE.getLitteral();
-                        break;
-                    case 1:
-                        score+= GamePointLitteral.FIFTEEN.getLitteral();
-                        break;
-                    case 2:
-                        score+= GamePointLitteral.THIRTY.getLitteral();
-                        break;
-                    case 3:
-                        score+= GamePointLitteral.FORTY.getLitteral();
-                        break;
                 }
             }
         }
         return score;
+    }
+
+    private String getPlayerGameLeader(int minusResult) {
+        return minusResult > 0 ? player1Name : player2Name;
+    }
+
+    private int getPlayersScoreDifference() {
+        return m_score1 - m_score2;
+    }
+
+    private boolean isPlayerScoreOverForty() {
+        return m_score1 >= 4 || m_score2 >= 4;
+    }
+
+    private String displayEquality() {
+        return switch (m_score1) {
+            case 0 -> GamePointLitteral.LOVE.getLitteralEquality();
+            case 1 -> GamePointLitteral.FIFTEEN.getLitteralEquality();
+            case 2 -> GamePointLitteral.THIRTY.getLitteralEquality();
+            default -> "Deuce";
+        };
     }
 
 }
