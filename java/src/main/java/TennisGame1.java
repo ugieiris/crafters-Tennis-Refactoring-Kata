@@ -3,6 +3,7 @@ public class TennisGame1 implements TennisGame {
 
     public static final String PLAYER_1 = "player1";
     public static final String PLAYER_2 = "player2";
+    public static final String ALL = "All";
     private int m_score1 = 0;
     private int m_score2 = 0;
     private String player1Name;
@@ -28,13 +29,13 @@ public class TennisGame1 implements TennisGame {
             switch (m_score1)
             {
                 case 0:
-                        score = "Love-All";
+                    score = GamePointLitteral.LOVE.getValue() + "-" + ALL;
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                        score = "Fifteen-" + ALL;
                     break;
                 case 2:
-                        score = "Thirty-All";
+                        score = "Thirty-" + ALL;
                     break;
                 default:
                         score = "Deuce";
