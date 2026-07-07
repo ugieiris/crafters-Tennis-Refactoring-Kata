@@ -78,28 +78,42 @@ public class TennisGame2 implements TennisGame
                 P1res="Thirty";
             score = P1res + "-" + P2res;
         }
-        
-        if (P1point > P2point && P2point >= 3)
-        {
-            score = "Advantage player1";
+
+        if (isAvantageBoolean()) {
+            if (P1point > P2point)
+            {
+                score = "Advantage player1";
+            }
+            if (P2point > P1point)
+            {
+                score = "Advantage player2";
+            }
+
         }
-        
-        if (P2point > P1point && P1point >= 3)
-        {
-            score = "Advantage player2";
+
+        if (isWin()) {
+            if (P1point >= 4 && P1point - P2point >= 2)
+            {
+                score = "Win for player1";
+            }
+            if (P2point >= 4 && P2point - P1point >= 2)
+            {
+                score = "Win for player2";
+            }
+
         }
-        
-        if (P1point>=4 && P2point>=0 && (P1point-P2point)>=2)
-        {
-            score = "Win for player1";
-        }
-        if (P2point>=4 && P1point>=0 && (P2point-P1point)>=2)
-        {
-            score = "Win for player2";
-        }
+
         return score;
     }
-    
+
+    private boolean isWin() {
+        return P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2 || P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2;
+    }
+
+    private boolean isAvantageBoolean() {
+        return P1point > P2point && P2point >= 3 || P2point > P1point && P1point >= 3;
+    }
+
     public void SetP1Score(int number){
         
         for (int i = 0; i < number; i++)
@@ -127,7 +141,7 @@ public class TennisGame2 implements TennisGame
     }
 
     public void wonPoint(String player) {
-        if (player == "player1")
+        if (player1Name.equals(player))
             P1Score();
         else
             P2Score();
